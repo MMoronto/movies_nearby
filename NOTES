@@ -1,0 +1,20 @@
+How to build a CLI Gem
+
+Plan your gem, imagine your interface
+Start with the project structure - google
+Start with the entry point - the file that's being run
+Force that to build the CLI interface.
+Stub out the interface.
+Start making things real.
+Discover objects.
+Program.
+A command Line Interface for listing movies showing nearby
+starting with Fandango.com
+
+user types in zipcode
+
+show a list of movies
+
+Jungle book
+Dumbo
+Lion King
