@@ -1,8 +1,8 @@
 class MoviesNearby::CLI 
   
   def call
-    list_movies
     menu
+    list_movies
     goodbye
   end 
   
