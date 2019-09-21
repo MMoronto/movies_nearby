@@ -1,4 +1,4 @@
-Class MoviesNearby::CLI 
+class MoviesNearby::CLI 
   
   def call
     list_movies
@@ -22,7 +22,8 @@ Class MoviesNearby::CLI
     case  input
     when "12345"
       list_movies
-    puts "Enter the number of the movie you would like to see or type exit to end session."
+      puts "Enter the number of the movie you would like to see or type exit to end session."
+    end 
     while input != "exit"
       input = gets.strip.downcase
       case input
