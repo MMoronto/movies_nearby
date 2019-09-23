@@ -1,6 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
-require 'pry'
+#require 'pry'
 
 require_relative "movies_nearby/version"
 require_relative "movies_nearby/movies"
