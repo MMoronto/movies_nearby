@@ -14,6 +14,8 @@ class MoviesNearby::Movies
     movies = []
     
     movies << self.scrape_fandango
+    
+    movies
   end 
   
   def self.scrape_fandango
