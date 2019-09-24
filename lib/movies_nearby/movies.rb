@@ -1,13 +1,10 @@
 class MoviesNearby::Movies 
   attr_accessor :name, :url, :summary, :stars
 
-  def initialize(name = nil, url = nil)
-    @name = name
-    @url = url
-  end
-  
-  def self.all 
-    @@all ||= scrape_movies_nearby
+ 
+  def self.nearby 
+    # Scrape fandango then return movie details based on data
+    self.scrape_movies
   end 
   
   def self.scrape_movies 
