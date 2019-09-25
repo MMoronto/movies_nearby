@@ -16,13 +16,13 @@ class MoviesNearby::Movies
   end 
   
   def self.scrape_fandango
-    doc = Nokogiri::HTML(open("https://fandango.com"))
+    doc = Nokogiri::HTML(open("https://www.fandango.com/19063_movietimes"))
     binding.pry 
     
     movie = self.new 
     
-    movie.name =doc.search("span.heading-style-1 browse-movielist--title poster-card--title").text.strip
-    movie.url = doc.search('https://www.fandango.com/abominable-2019-218991/movie-overview').attr("href").value 
+    movie.name =doc.search("h3.fd-movie__title font-sans-serif font-lg font-300 uppercase").text.strip
+    movie.url = doc.search('a.icon icon-follow-gray fd-movie__follow-icon js-hearts-heart').attr("href").value 
     movie.summary = doc.search("p.mop__synopsis-content").text.strip
     movie.stars = doc.search("div.carousel-cast-crew").collect{|e| e.text.strip}.join(",")
     
