@@ -16,12 +16,14 @@ class MoviesNearby::Movies
   end 
   
   def self.scrape_fandango
-    doc = Nokogiri::HTML(open("https://www.fandango.com/movies-in-theaters"))
-    binding.pry 
+    doc = Nokogiri::HTML(open("https://www.fandango.com"))
+   
     
     movie = self.new 
     
     movie.name = doc.search("span.heading-style-1.browse-movielist--title poster-card--title").text.strip
+     binding.pry 
+     
     movie.url = doc.search('a.subnav__link').attr("href").value 
     movie.summary = doc.search("p.movie-synopsis__body").text.strip
     movie.stars = doc.search("div.carousel-cast-crew").collect{|e| e.text.strip}.join(",")
