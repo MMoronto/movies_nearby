@@ -21,9 +21,9 @@ class MoviesNearby::Movies
     
     movie = self.new 
     
-    movie.name = doc.search("span.heading-style-1 browse-movielist--title poster-card--title").text.strip
-    movie.url = doc.search('a.icon icon-follow-gray fd-movie__follow-icon js-hearts-heart').attr("href").value 
-    movie.summary = doc.search("p.mop__synopsis-content").text.strip
+    movie.name = doc.search("h1.subnav__title heading-style-1 heading-size-xl").text.strip
+    movie.url = doc.search('a.subnav__link').attr("href").value 
+    movie.summary = doc.search("p.movie-synopsis__body").text.strip
     movie.stars = doc.search("div.carousel-cast-crew").collect{|e| e.text.strip}.join(",")
     
     movie 
