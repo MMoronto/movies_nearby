@@ -1,33 +1,49 @@
 class MoviesNearby::Movies 
   attr_accessor :name, :url, :summary, :stars
 
- 
-  def self.nearby 
-    # Scrape fandango then return movie details based on data
-    self.scrape_movies
+  def initialize(name = nil, url = nil)
+    @name = name
+    @url = url 
+  end
+  
+  def self.all 
+    @@all ||= scrape_fandango
   end 
   
-  def self.scrape_movies 
-    movies = []
-    
-    movies << self.scrape_fandango
-    
-    movies
+  def self.find(id)
+    self.all[id-1]
   end 
+  
+  def self.find_by_name(name) 
+    self.all.detect do |m| 
+      m.name.downcase.strip == name.downcase.strip ||
+      m.name.split("(").first.strip.downcase == name.downcase.strip
+    end 
+  end 
+  
+  def summary
+    @summary ||= plot_summary_doc.search("#plot-summaries-content p").text.strip
+  end
+
+  def stars
+    @stars ||= doc.search("#titleCast span[itemprop='name']").collect{|e| e.text.strip}.join(", ")
+  end
+  
+  def plot_summary_doc
+      @plot_summary_doc ||= Nokogiri::HTML(open("#{self.url}plotsummary"))
+    end
+
   
   def self.scrape_fandango
-    doc = Nokogiri::HTML(open("https://www.fandango.com"))
-   
+    doc = Nokogiri::HTML(open("https://www.fandango.com/movies-in-thearters"))
     
-    movie = self.new 
+    binding.pry 
     
-    movie.name = doc.search("span.heading-style-1.browse-movielist--title poster-card--title").text.strip
-     binding.pry 
-     
-    movie.url = doc.search('a.subnav__link').attr("href").value 
-    movie.summary = doc.search("p.movie-synopsis__body").text.strip
-    movie.stars = doc.search("div.carousel-cast-crew").collect{|e| e.text.strip}.join(",")
-    
-    movie 
-  end 
+    names = doc.search("h4[itemprop='name'] a[itemprop='url']")
+    names.collect{|e| new(e.text.strip, "http://www.fandango.com#{e.attr("href").split("?").first.strip}")}
+  end
+  
+  def doc
+      @doc ||= Nokogiri::HTML(open(self.url))
+  end
 end 
