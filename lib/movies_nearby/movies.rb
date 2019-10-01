@@ -22,15 +22,15 @@ class MoviesNearby::Movies
   end 
   
   def summary
-    @summary ||= plot_summary_doc.search("#plot-summaries-content p").text.strip
+    @summary ||= plot_summary_doc.search("p.mop__synopsis-content").text.strip
   end
 
   def stars
-    @stars ||= doc.search("#titleCast span[itemprop='name']").collect{|e| e.text.strip}.join(", ")
+    @stars ||= doc.search("dl.cast-and-crew__credits[itemprop='name']").collect{|e| e.text.strip}.join(", ")
   end
   
   def plot_summary_doc
-      @plot_summary_doc ||= Nokogiri::HTML(open("#{self.url}plotsummary"))
+      @plot_summary_doc ||= Nokogiri::HTML(open("#{self.url}plot-summary"))
     end
 
   
