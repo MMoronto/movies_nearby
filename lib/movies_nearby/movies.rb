@@ -39,8 +39,8 @@ class MoviesNearby::Movies
     
     binding.pry 
     
-    names = doc.search("h4[itemprop='name'] a[itemprop='url']")
-    names.collect{|e| new(e.text.strip, "http://www.fandango.com#{e.attr("href").split("?").first.strip}")}
+    names = doc.search("span[itemprop='heading-style-1'] a[itemprop='url']")
+    names.collect{|e| new(e.text.strip, "https://www.fandango.com#{e.attr("href").split("?").first.strip}")}
   end
   
   def doc
