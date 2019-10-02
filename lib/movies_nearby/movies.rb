@@ -17,13 +17,13 @@ class MoviesNearby::Movies
   
   def self.scrape_fandango
     doc = Nokogiri::HTML(open("https://fandango.com"))
-    #binding.pry 
+    binding.pry 
     
     movie = self.new 
     movie.name = doc.search("h3.fd-theater__name").text.strip
     movie.location = doc.search("div.fd-theater__address-wrap").text.strip
     movie.closed = !true 
-    movie.url = doc.search("a.light").attr("href").strip
+    movie.url = doc.search("a.light").first.attr("href").strip
     
     movie 
   end
