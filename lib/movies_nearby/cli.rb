@@ -1,42 +1,36 @@
 class MoviesNearby::CLI 
   
   def call
-    menu
     list_movies
+    menu
     goodbye
   end 
   
   def list_movies 
-    puts "movies showing near you:"
-    puts <<-DOC.gsub  /^|s*/, '' 
-      1.  AMC Marple 10
-      2.  Regal Edgmont Square
-      3.  AMC Dine-in Painters Crossing 9
-    DOC
+    puts "Movie Theaters near you:"
+    @movies = MoviesNearby::Movies.nearby
+    @movies.each.with_index(1) do |movie, i|
+      puts "#{i}. #{movie.name} - #{movie.location} - #{movie.open}" 
+    end 
   end 
   
   def menu 
-    puts "Find a movie theatre near Media PA!"
-    puts "Enter 'nearby' (or type exit to end session):"
-    input = gets.strip
-    case  input
-    when "nearby"
-      list_movies
-      puts "Enter the number of the movie theater you would like to visit or type exit to end session."
-    end 
+    input = nil 
     while input != "exit"
+      puts "Enter the number of the movie theater you would like more info on or type list to see the list again or type exit:"
       input = gets.strip.downcase
-      case input
-      when "1"
-        puts "More info on movie theater 1..."
-      when "2"
-        puts "More info on movie theater 2..."
-      when "3"
-        puts "More info on movie theater 3..."
-      end 
-    end 
-  end 
-  
+    
+      if input.to_i > 0 
+        the_movie = @movies[input.to_i-1]
+        puts "#{the_movie.name} - #{the_movie.location} - #{the_movie.open}"
+      elsif input == "list"
+        list_movies
+      else 
+        puts "Not sure what you want, type list or exit."
+      end
+    end
+  end   
+
   def goodbye
     puts "See you next time for more movie theater listings!!!"
   end 
