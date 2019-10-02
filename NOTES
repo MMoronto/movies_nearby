@@ -8,13 +8,13 @@ Stub out the interface.
 Start making things real.
 Discover objects.
 Program.
-A command Line Interface for listing movies showing nearby
+A command Line Interface for listing movie theaters near Media PA
 starting with Fandango.com
 
-user types in zipcode
+user types in 'nearby'
 
-show a list of movies
+show a list of movie theathers
 
-Jungle book
-Dumbo
-Lion King
+AMC Marple 10
+Regal Edgmont Square
+AMC Dine-in Painters Crossing 9

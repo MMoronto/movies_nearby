@@ -17,7 +17,7 @@ class MoviesNearby::CLI
   
   def menu 
     puts "Find a movie theatre near Media PA!"
-    puts "Enter nearby (or type exit to end session):"
+    puts "Enter 'nearby' (or type exit to end session):"
     input = gets.strip
     case  input
     when "nearby"
