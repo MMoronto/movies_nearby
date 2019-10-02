@@ -10,7 +10,7 @@ class MoviesNearby::CLI
     puts "Movie Theaters near you:"
     @movies = MoviesNearby::Movies.nearby
     @movies.each.with_index(1) do |movie, i|
-      puts "#{i}. #{movie.name} - #{movie.location} - #{movie.open}" 
+      puts "#{i}. #{movie.name} - #{movie.location} - #{movie.closed}" 
     end 
   end 
   
@@ -22,7 +22,7 @@ class MoviesNearby::CLI
     
       if input.to_i > 0 
         the_movie = @movies[input.to_i-1]
-        puts "#{the_movie.name} - #{the_movie.location} - #{the_movie.open}"
+        puts "#{the_movie.name} - #{the_movie.location} - #{the_movie.closed}"
       elsif input == "list"
         list_movies
       else 
