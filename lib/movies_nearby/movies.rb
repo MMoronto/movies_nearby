@@ -22,7 +22,7 @@ class MoviesNearby::Movies
     
     movie = self.new 
     movie.name = doc.search("h3.fd-theater__name").text.strip
-    movie.location = doc.search("div.fd-theater__address-wrap")
+    movie.location = doc.search("div.fd-theater__address-wrap").text.strip
     movie.open = true 
     movie.url = doc.search("a.light").attr("href").strip
     
