@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
-require './lib/movies_nearby'
+require 'bundler/setup'
+require 'movies_nearby'
 
 MoviesNearby::CLI.new.call
