@@ -16,7 +16,7 @@ class MoviesNearby::Movies
   
   
   def self.scrape_fandango
-    doc = Nokogiri::HTML(open("https://fandango.com"))
+    doc = Nokogiri::HTML(open("https://fandango.com/19063_movietimes"))
     binding.pry 
     
     movie = self.new 
